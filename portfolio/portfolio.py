@@ -16,7 +16,7 @@ class Portfolio:
         price_history_df = yf.download(
             tickers,
             start=self.trades_df.index[0],
-            end=self.trades_df.index[-1] + datetime.timedelta(days=1),
+            end=datetime.date.today(),
             group_by="ticker",
             interval="1d"
         )
@@ -109,7 +109,7 @@ class Portfolio:
         
         date_range = pd.date_range(
             start=self.trades_df.index[0],
-            end=self.trades_df.index[-1]
+            end=datetime.date.today()
         )
 
         for day in date_range:
