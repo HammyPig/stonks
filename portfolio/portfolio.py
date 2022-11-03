@@ -8,7 +8,13 @@ class Portfolio:
 
     def __init__(self, trades_df):
         self.price_history_df = None
-        self.trades_df = trades_df
+        self.set_trades(trades_df)
+
+    def get_trades(self):
+        return self.trades_df
+
+    def set_trades(self, trades):
+        self.trades_df = trades
         self.cash = 0
         self.raw_investment = 0
         self.holdings = {}
@@ -17,6 +23,18 @@ class Portfolio:
         self.unit_history_df = None
         self.profit_history_df = None
         self.simulate()
+
+    def unit_history(self):
+        return self.unit_history_df
+
+    def equity_history(self):
+        return self.equity_history_df
+
+    def profit_history(self):
+        return self.profit_history_df
+
+    def cost(self):
+        return self.raw_investment
 
     def simulate(self):
         tickers = list(self.trades_df["ticker"].unique())
