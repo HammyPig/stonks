@@ -99,11 +99,15 @@ class Portfolio:
     def equity_on(self, date_obj):
         equity = {}
         for ticker, units in self.holdings.items():
-            try:
-                ticker_price_history_df = self.price_history_df[ticker]
-            except KeyError:
-                print(f"Price history for {ticker} not found")
-                continue
+            if len(list(self.trades_df["ticker"].unique())) == 1:
+                ticker_price_history_df = self.price_history_df
+            else:
+                try:
+                    ticker_price_history_df = self.price_history_df[ticker]
+                except KeyError:
+                    print(f"Price history for {ticker} not found")
+                    #print(self.price_history_df)
+                    continue
             
             try:
                 unit_price = ticker_price_history_df.loc[date_obj]["Close"]
