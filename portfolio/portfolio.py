@@ -44,7 +44,7 @@ class Portfolio:
         self.price_history_df = yf.download(
             tickers,
             start=start_date,
-            end=end_date,
+            end=end_date + datetime.timedelta(days=1),
             group_by="ticker",
             interval="1d"
         )
